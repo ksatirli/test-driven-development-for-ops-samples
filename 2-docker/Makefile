@@ -48,8 +48,7 @@ test:
 	@bundle \
 		install \
 	&& \
-	bundle \
-		exec --verbose rspec --color
+	rspec
 
 .PHONY: build
 build:
