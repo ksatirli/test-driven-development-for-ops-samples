@@ -1,0 +1,54 @@
+ {
+  "builders": [
+    {
+      "ami_description": "TDD for Ops, see https://cltvt.it/tdd-for-ops for information",
+      "ami_name": "cltvt-tdd-for-ops-packer",
+      "instance_type": "m3.medium",
+      "region": "eu-west-1",
+      "shutdown_behavior": "terminate",
+      "source_ami_filter": {
+        "filters": {
+          "name": "CentOS Linux 7 x86_64 HVM EBS 16*",
+          "root-device-type": "ebs",
+          "virtualization-type": "hvm"
+        },
+        "most_recent": "true",
+        "owners": [
+          "679593333241"
+        ]
+      },
+      "spot_price": "0",
+      "spot_price_auto_product": "Linux/UNIX (Amazon VPC)",
+      "ssh_pty": "false",
+      "ssh_timeout": "5m",
+      "ssh_username": "centos",
+      "tags": {
+        "Amazon_AMI_Management_Identifier": "cltvt-tdd-for-ops-packer",
+        "Name": "TDD for Ops, see https://cltvt.it/tdd-for-ops for information"
+      },
+      "type": "amazon-ebs",
+      "user_data_file": "./files/scripts/user-data.sh"
+    }
+  ],
+  "provisioners": [
+    {
+      "ansible_env_vars": [
+        "ANSIBLE_HOST_KEY_CHECKING=False",
+        "ANSIBLE_NOCOLOR=True",
+        "ANSIBLE_SSH_ARGS='-o ForwardAgent=no -o ControlMaster=auto -o ControlPersist=yes'"
+      ],
+      "groups": [
+        "packer"
+      ],
+      "playbook_file": "./files/playbooks/base.yml",
+      "sftp_command": "/usr/libexec/openssh/sftp-server -e",
+      "type": "ansible",
+      "user": "centos"
+    },
+    {
+      "rake_file": "Rakefile",
+      "rake_task": "serverspec:base",
+      "type": "serverspec"
+    }
+  ]
+}

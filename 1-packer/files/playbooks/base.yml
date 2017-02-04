@@ -1,0 +1,36 @@
+---
+
+- name: provisioning base
+  hosts: packer
+  become: true
+  remote_user: centos
+
+  tasks:
+    - name: set SELinux policy
+      selinux:
+        policy: targeted
+        state: permissive
+      tags:
+        - selinux
+
+    - name: enable EPEL repository
+      yum:
+        name: epel-release
+        state: latest
+
+    - name: install YUM Packages
+      yum:
+        name: "{{ item.name }}"
+        state: present
+      with_items:
+        -
+          name: curl
+        -
+          name: wget
+        -
+          name: python2-pip
+
+    - name: install PIP Packages
+      pip:
+        name: awscli
+        state: present
