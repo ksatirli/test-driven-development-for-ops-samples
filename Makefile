@@ -144,3 +144,14 @@ step-1:
   packer \
     build \
       "image.json"
+
+.PHONY: step-2
+step-2:
+	@echo "$(STYLE_BRIGHT)STEP 2:$(STYLE_OFF)" && \
+  echo "$(STYLE_MUTE)Building testable image using Docker:$(STYLE_OFF)" && \
+  echo && \
+  cd "2-docker" && \
+  make \
+    build && \
+  make \
+    test
