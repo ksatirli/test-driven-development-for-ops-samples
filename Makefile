@@ -29,6 +29,22 @@ else
 endif
 # end: check for availability of Golang
 
+# check for availability of Ruby
+# Version must be higher than 2.1 for awsspec.
+# Hold my beer. This ain't gonna be pretty. https://dcmnt.me/2kuR8lR
+RUBY_PATH = $(shell which ruby)
+RUBY_VERSION = $(shell ruby --version | grep -m 1 -o '[0-9]*\.[0-9]*\.[0-9]')
+RUBY_VER_MAJOR := $(shell echo $(RUBY_VERSION) | cut -f1 -d.)
+RUBY_VER_MINOR := $(shell echo $(RUBY_VERSION) | cut -f2 -d.)
+RUBY_GT_2_1 := $(shell [ $(RUBY_VER_MAJOR) -gt 2 -o \( $(RUBY_VER_MAJOR) -eq 2 -a $(RUBY_VER_MINOR) -ge 1 \) ] && echo true)
+
+ifeq ($(RUBY_GT_2_1),true)
+	RUBY_AVAILABLE = true
+else
+	RUBY_AVAILABLE = false
+endif
+# end: check for availability of Ruby
+
 # check for availability of Packer
 ifeq ($(shell which packer >/dev/null 2>&1; echo $$?), 1)
 	PACKER_AVAILABLE = false
@@ -90,6 +106,19 @@ else
 	@EXIT_WITH_ERROR = true
 endif
 # END: check for `packer` availability
+
+# BEGIN: check for `ruby` availability
+	@echo
+	@echo "Ruby"
+
+ifeq ($(RUBY_AVAILABLE), true)
+	@echo "$(SIGN_OK) found binary at \"$(RUBY_PATH)\""
+	@echo "$(SIGN_OK) found version \"$(RUBY_VERSION)\""
+else
+	@echo "$(SIGN_ERR) unable to find \"ruby\""
+	@EXIT_WITH_ERROR = true
+endif
+# END: check for `ruby` availability
 
 # BEGIN: check for `aws` availability
 	@echo
