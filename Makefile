@@ -19,6 +19,16 @@ SIGN_OK = $(STYLE_OK)  ✓$(STYLE_OFF)
 SIGN_ERR = $(STYLE_ERR)  ✗$(STYLE_OFF)
 SIGN_WARN = $(STYLE_WARN) !$(STYLE_OFF)
 
+# check for availability of Golang
+ifeq ($(shell which go >/dev/null 2>&1; echo $$?), 1)
+	GO_AVAILABLE = false
+else
+	GO_AVAILABLE = true
+	GO_PATH = $(shell which go)
+	GO_VERSION = $(shell go version | grep -m 1 -o '[0-9]*\.[0-9]*\.[0-9]')
+endif
+# end: check for availability of Golang
+
 # check for availability of Packer
 ifeq ($(shell which packer >/dev/null 2>&1; echo $$?), 1)
 	PACKER_AVAILABLE = false
@@ -53,7 +63,7 @@ help:
 	@echo "   | |    | |__| | | |__| |    | |   | (_) | | |      | |__| | | |       ____) |"
 	@echo "   |_|    |_____/  |_____/     |_|    \___/  |_|       \____/  |_|      |_____/ "
 	@echo ""
-	@echo "  $(STYLE_MUTE)CfgMgmtCamp 2017 Gent$(STYLE_MUTE) "
+	@echo "  $(STYLE_MUTE)CfgMgmtCamp 2017 Ghent edition$(STYLE_MUTE) "
 	@echo "$(STYLE_MUTE)"
 	@echo
 	@echo	"$(STYLE_BRIGHT)   Targets:$(STYLE_OFF)"
@@ -61,7 +71,7 @@ help:
 	@echo "     make install-bundler $(STYLE_MUTE)........$(STYLE_OFF) installs Bundler via Gem"
 	@echo "     make install-rspec $(STYLE_MUTE)..........$(STYLE_OFF) installs RSpec via Gem"
 	@echo "     make install-rspec-deps $(STYLE_MUTE).....$(STYLE_OFF) installs ServerSpec, A via Gem"
-
+	@echo
 
 .PHONY: check
 check:
