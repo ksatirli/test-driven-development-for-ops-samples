@@ -84,6 +84,7 @@ help:
 	@echo
 	@echo	"$(STYLE_BRIGHT)   Targets:$(STYLE_OFF)"
 	@echo "     make check $(STYLE_MUTE)..................$(STYLE_OFF) checks if all required dependencies are installed"
+	@echo
 	@echo "     make install-bundler $(STYLE_MUTE)........$(STYLE_OFF) installs Bundler via Gem"
 	@echo "     make install-rspec $(STYLE_MUTE)..........$(STYLE_OFF) installs RSpec via Gem"
 	@echo "     make install-rspec-deps $(STYLE_MUTE).....$(STYLE_OFF) installs ServerSpec, A via Gem"
