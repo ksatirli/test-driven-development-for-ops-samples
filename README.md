@@ -1,4 +1,4 @@
-![Test-driven development for Operations Engineers](https://cultivatedops-static.s3.amazonaws.com/projects/tdd-for-ops/logo-512.png)
+![Test-driven development for Operations Engineers](https://cultivatedops-static.s3.amazonaws.com/projects/tdd-for-ops/logo-1024.png)
 
 # Code Samples for `Test-Driven Development for Ops`
 
