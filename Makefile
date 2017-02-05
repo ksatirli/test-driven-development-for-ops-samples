@@ -87,6 +87,7 @@ help:
 	@echo "     make install-bundler $(STYLE_MUTE)........$(STYLE_OFF) installs Bundler via Gem"
 	@echo "     make install-rspec $(STYLE_MUTE)..........$(STYLE_OFF) installs RSpec via Gem"
 	@echo "     make install-rspec-deps $(STYLE_MUTE).....$(STYLE_OFF) installs ServerSpec, A via Gem"
+	@echo
 	@echo "     make step-1 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Packer"
 	@echo "     make step-2 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Docker"
 	@echo "     make step-3 $(STYLE_MUTE).................$(STYLE_OFF) tests for IAM user settings"
