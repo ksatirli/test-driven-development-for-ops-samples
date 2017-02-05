@@ -87,9 +87,9 @@ help:
 	@echo "     make install-bundler $(STYLE_MUTE)........$(STYLE_OFF) installs Bundler via Gem"
 	@echo "     make install-rspec $(STYLE_MUTE)..........$(STYLE_OFF) installs RSpec via Gem"
 	@echo "     make install-rspec-deps $(STYLE_MUTE).....$(STYLE_OFF) installs ServerSpec, A via Gem"
-	@echo "			make step-1 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Packer"
-	@echo "			make step-2 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Docker"
-	@echo "			make step-3 $(STYLE_MUTE).................$(STYLE_OFF) tests for IAM user settings"
+	@echo "     make step-1 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Packer"
+	@echo "     make step-2 $(STYLE_MUTE).................$(STYLE_OFF) builds testable image using Docker"
+	@echo "     make step-3 $(STYLE_MUTE).................$(STYLE_OFF) tests for IAM user settings"
 	@echo
 
 .PHONY: check
@@ -198,9 +198,9 @@ step-2:
   make \
     test
 
-.PHONY: step-2
-step-2:
-	@echo "$(STYLE_BRIGHT)STEP 2:$(STYLE_OFF)" && \
+.PHONY: step-3
+step-3:
+	@echo "$(STYLE_BRIGHT)STEP 3:$(STYLE_OFF)" && \
   echo "$(STYLE_MUTE)Building testable image using Docker:$(STYLE_OFF)" && \
   echo && \
   cd "3-aws" && \
