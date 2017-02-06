@@ -58,8 +58,6 @@ describe "#{$app_name} (built from \"#{$dockerfile}\")" do
     @container.stop
     @container.kill
     @container.delete(:force => true)
-
-    # @image.delete(:force => true)
   end
   ##############################################################################
 
