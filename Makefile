@@ -19,9 +19,6 @@ SIGN_OK = $(STYLE_OK)  ✓$(STYLE_OFF)
 SIGN_ERR = $(STYLE_ERR)  ✗$(STYLE_OFF)
 SIGN_WARN = $(STYLE_WARN) !$(STYLE_OFF)
 
-# Packer variables
-AMI_NAME = "cltvt-tdd-for-ops-{{timestamp}}"
-
 # check for availability of Ruby
 # Version must be higher than 2.1 for awsspec.
 # Hold my beer. This ain't gonna be pretty. https://dcmnt.me/2kuR8lR
@@ -190,8 +187,7 @@ step-1:
   cd "1-packer" && \
   packer \
     build \
-			-var "ami_name=$(AMI_NAME)" \
-      "image.json"
+    "image.json"
 
 .PHONY: step-2
 step-2:

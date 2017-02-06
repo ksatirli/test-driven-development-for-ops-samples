@@ -2,7 +2,7 @@
   "builders": [
     {
       "ami_description": "TDD for Ops, see https://cltvt.it/tdd-for-ops for information",
-      "ami_name": "cltvt-tdd-for-ops-packer",
+      "ami_name": "cltvt-tdd-for-ops-packer-{{ user `timestamp` }}",
       "instance_type": "m3.medium",
       "region": "eu-west-1",
       "shutdown_behavior": "terminate",
