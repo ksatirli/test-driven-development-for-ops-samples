@@ -19,15 +19,8 @@ SIGN_OK = $(STYLE_OK)  ✓$(STYLE_OFF)
 SIGN_ERR = $(STYLE_ERR)  ✗$(STYLE_OFF)
 SIGN_WARN = $(STYLE_WARN) !$(STYLE_OFF)
 
-# check for availability of Golang
-ifeq ($(shell which go >/dev/null 2>&1; echo $$?), 1)
-	GO_AVAILABLE = false
-else
-	GO_AVAILABLE = true
-	GO_PATH = $(shell which go)
-	GO_VERSION = $(shell go version | grep -m 1 -o '[0-9]*\.[0-9]*\.[0-9]')
-endif
-# end: check for availability of Golang
+# Packer variables
+AMI_NAME = "cltvt-tdd-for-ops-{{timestamp}}"
 
 # check for availability of Ruby
 # Version must be higher than 2.1 for awsspec.
@@ -44,6 +37,16 @@ else
 	RUBY_AVAILABLE = false
 endif
 # end: check for availability of Ruby
+
+# check for availability of Golang
+ifeq ($(shell which go >/dev/null 2>&1; echo $$?), 1)
+	GO_AVAILABLE = false
+else
+	GO_AVAILABLE = true
+	GO_PATH = $(shell which go)
+	GO_VERSION = $(shell go version | grep -m 1 -o '[0-9]*\.[0-9]*\.[0-9]')
+endif
+# end: check for availability of Golang
 
 # check for availability of Packer
 ifeq ($(shell which packer >/dev/null 2>&1; echo $$?), 1)
@@ -187,6 +190,7 @@ step-1:
   cd "1-packer" && \
   packer \
     build \
+			-var "ami_name=$(AMI_NAME)" \
       "image.json"
 
 .PHONY: step-2
