@@ -207,7 +207,7 @@ step-2:
 .PHONY: step-3
 step-3:
 	@echo "$(STYLE_BRIGHT)STEP 3:$(STYLE_OFF)" && \
-  echo "$(STYLE_MUTE)Building testable image using Docker:$(STYLE_OFF)" && \
+  echo "$(STYLE_MUTE)Verifying AWS resources:$(STYLE_OFF)" && \
   echo && \
   cd "3-aws" && \
   rspec
